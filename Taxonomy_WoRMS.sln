@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taxonomy_WoRMS", "Taxonomy_WoRMS\Taxonomy_WoRMS.csproj", "{CDCDB10D-A96E-477A-934B-29D57DFC8CA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDCDB10D-A96E-477A-934B-29D57DFC8CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCDB10D-A96E-477A-934B-29D57DFC8CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDCDB10D-A96E-477A-934B-29D57DFC8CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDCDB10D-A96E-477A-934B-29D57DFC8CA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09188D59-FFD5-45BC-83AE-D3BE73ADC735}
+	EndGlobalSection
+EndGlobal
