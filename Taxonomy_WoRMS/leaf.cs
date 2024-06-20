@@ -11,47 +11,41 @@ namespace Taxonomy_WoRMS
         private int tax_ID = -1;
         private string name = "";
         private string nameLower = "";
-        private string unique_Name = "";
-        private string otherNames = "";
         private bool isGood = false;
 
         public leaf(string[] items)
         {
             try
             {
-                tax_ID = Convert.ToInt32(items[0].Trim());
-                name = items[1].Trim();
-                nameLower = name.ToLower();
-                unique_Name = items[2].Trim();
-                otherNames = items[3].Trim();
-                isGood = true;
+                int index = items[0].LastIndexOf(':') + 1;
+                if (index > 0)
+                {
+                    string id = items[0].Substring(index);
+                    try
+                    {
+                        tax_ID = Convert.ToInt32(id);
+                        name = items[1];
+                        nameLower = name.ToLower();
+                        isGood = true;
+                    }
+                    catch { isGood = false; }
+                }              
             }
             catch{ isGood = false; }
+        }
 
+        public leaf(int tax_ID, string name)
+        {
+            this.tax_ID = tax_ID;
+            this.name = name;
+            this.nameLower = name.ToLower();
+            this.isGood = true;
         }
 
         public int getTax_ID { get { return tax_ID; } }
         public string getName { get { return name; } }
-        public string getNameLowerCase { get { return nameLower; } }
-        public string getUnique_Name { get { return unique_Name; } }
-        public string getOtherNames { get { return otherNames; } }
+        public string getNameLowerCase { get { return nameLower; } }       
         public bool getIsGood { get { return isGood; } }
-
-        public string Serialise()
-        {
-            string answer = tax_ID.ToString() + "\t" + name + "\t" + nameLower + "\t" + unique_Name + "\t" + otherNames + "\t" + isGood.ToString();
-            return answer;
-        }
-
-        public leaf(string serialData)
-        {
-            string[] items = serialData.Split('\t');
-            tax_ID = Convert.ToInt32(items[0]);
-            name = items[1];
-            nameLower = items[2];
-            unique_Name = items[3];
-            otherNames = items[4];
-            isGood = Convert.ToBoolean(items[5]);
-        }
+                
     }
 }

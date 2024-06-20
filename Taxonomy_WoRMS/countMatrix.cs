@@ -159,11 +159,6 @@ namespace Taxonomy_WoRMS
             else { btnFile.Enabled = false; }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSelectBlast_Click(object sender, EventArgs e)
         {
 

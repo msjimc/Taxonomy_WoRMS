@@ -36,52 +36,59 @@ namespace Taxonomy_WoRMS
             {
                 fr = new System.IO.StreamReader(nodeFile);
                 string line = "";
+                string[] items = null;
                 int counter = 0;
-                Text = "Couting nodes";
-
-                while (fr.Peek() > 0)
-                {
-                    line = fr.ReadLine();
-                    node n = new node(line);
-                    if (n.getIsGood == true) { counter++; }
-                    line = null;
-                }
-                fr.Close();
-
 
                 nodes = new Dictionary<int, node>(counter);
-                fr = new System.IO.StreamReader(nodeFile);
 
-                Text = "Making  " + counter.ToString("N0") + " nodes";
+                Text = "Getting taxonomy data";
                 Application.DoEvents();
+
+                fr.ReadLine();
 
                 while (fr.Peek() > 0)
                 {
                     line = fr.ReadLine();
-                    node n = new node(line);
-                    if (n.getIsGood == true)
+                    items = line.Split('\t');
+                    string lastName = "";
+                    int index = items[0].LastIndexOf(":") + 1;
+                    if (index > 0)
                     {
-                        nodes.Add(n.getTax_ID, n);
+                        string sID = items[0].Substring(index).Trim();
+                        int ID = -1;
+                        try
+                        {
+                            ID = Convert.ToInt32(sID);                           
+                            string taxonomy = "";
+                            lastName = items[7];
+                            for (int place = 10; place < 17; place++)
+                            {
+                                
+                                if (string.IsNullOrEmpty(items[place]) == false)
+                                {
+                                    taxonomy += items[place] + "\t";
+                                    lastName = items[place] + ".";
+                                }
+                                else
+                                {                                    
+                                    taxonomy += lastName + "\t";
+                                    lastName += ".";                                    
+                                }
+                            }
+                            taxonomy += items[5] + "\t[" + items[22] + "]";
+
+                            node n = new node(ID, taxonomy, items[5], items[19]);
+                            if (n.getIsGood == true)
+                            { nodes.Add(n.getTax_ID, n); }
+                        }
+                        catch { }
                     }
-                    line = null;
-                    n = null;
+
                 }
+
+
                 fr.Close();
 
-                Text = "Linking nodes to form tree";
-                Application.DoEvents();
-
-                foreach (node n in nodes.Values)
-                {
-                    int parent = n.getParent_Tax_ID;
-                    if (parent != n.getTax_ID)
-                    {
-                        if (nodes.ContainsKey(parent) == true)
-                        { n.setParentNode(nodes[parent]); }
-                        else
-                        { throw new Exception("hum"); }
-                    }
-                }
                 btnGetNames.Enabled = true;
             }
             catch
@@ -97,14 +104,13 @@ namespace Taxonomy_WoRMS
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string namesFile = FileString.OpenAs("Select the NCBI vernacular names file (vernacularname.txt)", "vernacularname.txt|*.txt");
+            string namesFile = FileString.OpenAs("Select the WoRMS vernacular names file (vernacularname.txt)", "vernacularname.txt|*.txt");
             if (System.IO.File.Exists(namesFile) == false) { return; }
             string formText = Text;
 
             System.IO.StreamReader fr = null;
             string[] items = null;
-            int counter = 0;
-
+            int counter = 0; 
             try
             {
                 Text = "Counting names";
@@ -113,44 +119,57 @@ namespace Taxonomy_WoRMS
                 fr = new System.IO.StreamReader(namesFile);
                 while (fr.Peek() > 0)
                 {
-                    items = fr.ReadLine().Split('|');
-                    leaf l = new leaf(items);
-                    if (l.getIsGood == true) { counter++; }
-                    items = null;
+                    items = fr.ReadLine().Split('\t');
+                    if (items[3].ToUpper().Equals("ENG") == true)
+                    {
+                        leaf l = new leaf(items);
+                        if (l.getIsGood == true) { counter++; }
+                        items = null;
+                    }                   
                 }
                 fr.Close();
 
-                leafs = new leaf[counter];
+               
                 Text = "Adding " + counter.ToString("N0") + " names to nodes";
                 Application.DoEvents();
+
+                counter += nodes.Count;
+                leafs = new leaf[counter];
 
                 counter = 0;
                 fr = new System.IO.StreamReader(namesFile);
 
                 while (fr.Peek() > 0)
                 {
-                    items = fr.ReadLine().Split('|');
-                    leaf l = new leaf(items);
-                    if (l.getIsGood == true)
+                    items = fr.ReadLine().Split('\t');
+                    if (items[3].ToUpper().Equals("ENG") == true)
                     {
-                        leafs[counter] = l;
-                        if (nodes.ContainsKey(l.getTax_ID) == true)
-                        { nodes[l.getTax_ID].setNames(l); }
-                        counter++;
+                        leaf l = new leaf(items);
+                        if (l.getIsGood == true)
+                        {
+                            leafs[counter] = l;
+                            counter++;
+                        }
+                        l = null;
                     }
                     items = null;
-                    l = null;
+                   
                 }
 
-                Text = "Sorting list of names";
+                foreach (node n in nodes.Values)
+                {
+                    leafs[counter] = n.getLeaf();
+                    counter++;
+                }
+
+
+                Text = "Sorting list of " + counter.ToString("N0") + " common English and latin names";
                 Application.DoEvents();
                 Array.Sort(leafs, new leafComparer());
 
                 btnNameSearch.Enabled = true;
                 btnTaxoIDSearch.Enabled = true;
-                btnAnnotate.Enabled = true;
-                btnSave.Enabled = true;
-
+                btnAnnotate.Enabled = true;                
             }
             catch { MessageBox.Show("Error reading data file", "Error"); }
             finally
@@ -388,7 +407,7 @@ namespace Taxonomy_WoRMS
                 answer = theName + "\t";
                 if (nodes.ContainsKey(leafs[index].getTax_ID) == true)
                 {
-                    string reply = putInConsistentOrder(nodes[leafs[index].getTax_ID].getString());
+                    string reply = nodes[leafs[index].getTax_ID].getString();
                     if (reply.Equals("No infomation") == true)
                     { answer = reply; }
                     else
@@ -405,7 +424,7 @@ namespace Taxonomy_WoRMS
                     answer = theName + "\t";
                     if (nodes.ContainsKey(leafs[index1].getTax_ID) == true)
                     {
-                        string reply = putInConsistentOrder(nodes[leafs[index1].getTax_ID].getString());
+                        string reply =nodes[leafs[index1].getTax_ID].getString();
                         if (reply.Equals("No infomation") == true)
                         { answer = reply; }
                         else
@@ -467,123 +486,6 @@ namespace Taxonomy_WoRMS
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-
-            string fileName = FileString.SaveAs("Enter name of file to save taxonomy too", "*.tax|*.tax");
-            if (fileName.Equals("Cancel") == true) { return; }
-            string title = Text;
-
-            System.IO.StreamWriter fw = null;
-            try
-            {
-                fw = new System.IO.StreamWriter(fileName);
-
-                Text = "Saving nodes";
-                Application.DoEvents();
-
-                fw.WriteLine("##Nodes##" + nodes.Count.ToString());
-
-                foreach (node n in nodes.Values)
-                {
-                    fw.WriteLine(n.Serialise());
-                }
-
-                Text = "Saving leafs";
-                Application.DoEvents();
-
-                fw.WriteLine("##Leaf##" + leafs.Length.ToString() + "##");
-                foreach (leaf l in leafs)
-                { fw.WriteLine(l.Serialise()); }
-
-            }
-            catch (Exception ex)
-            { MessageBox.Show("Error saving data to file: " + ex.Message); }
-            finally
-            {
-                if (fw != null) { fw.Close(); }
-                Text = title;
-            }
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            string fileName = FileString.OpenAs("Select the file of serialised NCBI taxonmic data", "*.tax|*.tax");
-            if (System.IO.File.Exists(fileName) == false) { return; }
-
-            System.IO.StreamReader sf = null;
-
-            btnNameSearch.Enabled = false;
-            btnTaxoIDSearch.Enabled = false;
-            btnAnnotate.Enabled = false;
-            string title = Text;
-            try
-            {
-                sf = new System.IO.StreamReader(fileName);
-
-                string line = sf.ReadLine();
-                if (line.StartsWith("##Nodes##") == true)
-                {
-                    Text = "Importing nodes";
-                    Application.DoEvents();
-
-                    int number = Convert.ToInt32(line.Substring(9));
-                    nodes = new Dictionary<int, node>(number);
-                    while (sf.Peek() > 0)
-                    {
-                        line = sf.ReadLine();
-                        if (line.StartsWith("##Leaf##") == true)
-                        { break; }
-                        else
-                        {
-                            node n = new node(line, true);
-                            nodes.Add(n.getTax_ID, n);
-                        }
-                    }
-
-                    Text = "Linking nodes to form tree";
-                    Application.DoEvents();
-
-                    foreach (node n in nodes.Values)
-                    {
-                        int parent = n.getParent_Tax_ID;
-                        if (parent != n.getTax_ID)
-                        {
-                            if (nodes.ContainsKey(parent) == true)
-                            { n.setParentNode(nodes[parent]); }
-                            else
-                            { throw new Exception("hum"); }
-                        }
-                    }
-
-                    Text = "Importing leafs";
-                    Application.DoEvents();
-
-                    number = Convert.ToInt32(line.Substring(8, line.Length - 10));
-                    leafs = new leaf[number];
-                    int counter = 0;
-
-                    while (sf.Peek() > 0)
-                    {
-                        line = sf.ReadLine();
-                        leaf l = new leaf(line);
-                        leafs[counter++] = l;
-                    }
-
-                }
-                btnNameSearch.Enabled = true;
-                btnTaxoIDSearch.Enabled = true;
-                btnAnnotate.Enabled = true;
-            }
-            catch (Exception ex)
-            { MessageBox.Show("Error saving data to file: " + ex.Message); }
-            finally
-            {
-                if (sf != null) { sf.Close(); }
-                Text = title;
-            }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Taxonomy_WoRMS
 
                 firstLines = new List<string>();
 
-                while (fr.Peek() > 0 && count < 251)
+                while (fr.Peek() > 0 && count < 51)
                 {
                     string line = fr.ReadLine();
                     if (string.IsNullOrEmpty(line.Trim()) == false)
@@ -59,45 +59,77 @@ namespace Taxonomy_WoRMS
 
         private void txtFirstSplit_TextChanged(object sender, EventArgs e)
         {
-
+            string value = txtFirstSplit.Text;
+            if (value.Length > 0)
+            {
+                if (txtFirstSplit.Text == "\\t")
+                { first = '\t'; }
+                else if (txtFirstSplit.Text == "\\s")
+                { first = ' '; }
+                else
+                { first = value[0]; }
+                firstSet = true;
+            }
+            else
+            { firstSet = false; }
+            SplitCurrentLine();
         }
 
         private void txtSecondSplit_TextChanged(object sender, EventArgs e)
         {
+            string value = txtSecondSplit.Text;
+            if (value.Length > 0)
+            {
 
+                if (txtSecondSplit.Text == "\\t")
+                { second = '\t'; }
+                else if (txtSecondSplit.Text == "\\s")
+                { second = ' '; }
+                else
+                { second = value[0]; }
+
+                secondSet = true;
+            }
+            else
+            { secondSet = false; }
+            SplitCurrentLine();
         }
 
         private void nudFirstFirstColumn_ValueChanged(object sender, EventArgs e)
         {
-
+            firstFirstIndex = (int)nudFirstFirstColumn.Value;
+            if (nudFirstSecondColumn.Value < firstFirstIndex)
+            { nudFirstSecondColumn.Value = firstFirstIndex; }
+            SplitCurrentLine();
         }
 
         private void nudFirstSecondColumn_ValueChanged(object sender, EventArgs e)
         {
-
+            firstSecondIndex = (int)nudFirstSecondColumn.Value;
+            if (nudFirstFirstColumn.Value > firstSecondIndex)
+            { nudFirstFirstColumn.Value = firstSecondIndex; }
+            SplitCurrentLine();
         }
 
         private void nudSecondFirstColumn_ValueChanged(object sender, EventArgs e)
         {
-
+            secondFirstIndex = (int)nudSecondFirstColumn.Value;
+            if (nudSecondSecondColumn.Value < secondFirstIndex)
+            { nudSecondSecondColumn.Value = secondFirstIndex; }
+            SplitCurrentLine();
         }
 
         private void nudSecondSecondColumn_ValueChanged(object sender, EventArgs e)
         {
-
+            secondSecondIndex = (int)nudSecondSecondColumn.Value;
+            if (nudSecondFirstColumn.Value > secondSecondIndex)
+            { nudSecondFirstColumn.Value = secondSecondIndex; }
+            SplitCurrentLine();
         }
 
         private void SplitCurrentLine()
         {
-            txtSelected.ForeColor = txtLine.ForeColor;
-
             fieldsToSearch list = getFieldsToSearch();
-            if (list == null)
-            {
-                Reason();
-                return;
-            }
-
             List<string> terms = list.words(firstLines[counter]);
 
             string response = "";
@@ -112,7 +144,6 @@ namespace Taxonomy_WoRMS
 
         private void Reason()
         {
-            txtSelected.ForeColor = Color.Red;
             if (firstSet == false)
             {
                 txtSelected.Text = "First delimiting charater not split";
@@ -304,12 +335,22 @@ namespace Taxonomy_WoRMS
 
         private void btnPervious_Click(object sender, EventArgs e)
         {
-
+            if (counter > 0)
+            {
+                counter--;
+                txtLine.Text = firstLines[counter];
+                SplitCurrentLine();
+            }
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-
+            if (counter < 20 && counter < firstLines.Count - 2)
+            {
+                counter++;
+                txtLine.Text = firstLines[counter];
+                SplitCurrentLine();
+            }
         }
 
         private void chkFirstFromEnd_CheckedChanged(object sender, EventArgs e)
@@ -342,6 +383,5 @@ namespace Taxonomy_WoRMS
             else
             { return null; }
         }
-
     }
 }

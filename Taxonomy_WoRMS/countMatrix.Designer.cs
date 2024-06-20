@@ -58,7 +58,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.cboSamples);
             this.groupBox1.Controls.Add(this.cboSpecies);
@@ -136,7 +136,7 @@
             this.rdoRow.TabIndex = 6;
             this.rdoRow.TabStop = true;
             this.rdoRow.Text = "The sample\'s data is written on one line and the counts for each sequence are wri" +
-    "ttne in columns";
+    "tten in columns";
             this.rdoRow.UseVisualStyleBackColor = true;
             this.rdoRow.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -187,12 +187,11 @@
             this.label1.Size = new System.Drawing.Size(257, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select the count matrix file by pressing the File button";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // gbCombine
             // 
-            this.gbCombine.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.gbCombine.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbCombine.Controls.Add(this.label8);
             this.gbCombine.Controls.Add(this.btnNext);
