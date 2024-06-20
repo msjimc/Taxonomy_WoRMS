@@ -57,27 +57,28 @@ namespace Taxonomy_WoRMS
                         string sID = items[0].Substring(index).Trim();
                         int ID = -1;
                         try
-                        {
-                            ID = Convert.ToInt32(sID);                           
+                        {                           
+                            ID = Convert.ToInt32(sID);
                             string taxonomy = "";
                             lastName = items[7];
                             for (int place = 10; place < 17; place++)
                             {
-                                
+
                                 if (string.IsNullOrEmpty(items[place]) == false)
                                 {
                                     taxonomy += items[place] + "\t";
                                     lastName = items[place] + ".";
                                 }
                                 else
-                                {                                    
+                                {
                                     taxonomy += lastName + "\t";
-                                    lastName += ".";                                    
+                                    lastName += ".";
                                 }
                             }
-                            taxonomy += items[5] + "\t[" + items[22] + "]";
-
-                            node n = new node(ID, taxonomy, items[5], items[19]);
+                            taxonomy += items[6] + "\t[" + items[22] + "]";
+                            if (items[15]=="")
+                            { }
+                            node n = new node(ID, taxonomy, items[15] + " " + items[17], items[5], items[6], items[19]);
                             if (n.getIsGood == true)
                             { nodes.Add(n.getTax_ID, n); }
                         }
@@ -110,34 +111,15 @@ namespace Taxonomy_WoRMS
 
             System.IO.StreamReader fr = null;
             string[] items = null;
-            int counter = 0; 
+            
             try
-            {
-                Text = "Counting names";
+            {               
+                Text = "Adding names to nodes";
                 Application.DoEvents();
 
-                fr = new System.IO.StreamReader(namesFile);
-                while (fr.Peek() > 0)
-                {
-                    items = fr.ReadLine().Split('\t');
-                    if (items[3].ToUpper().Equals("ENG") == true)
-                    {
-                        leaf l = new leaf(items);
-                        if (l.getIsGood == true) { counter++; }
-                        items = null;
-                    }                   
-                }
-                fr.Close();
+               List<leaf> allLeafs=new List<leaf>();
 
-               
-                Text = "Adding " + counter.ToString("N0") + " names to nodes";
-                Application.DoEvents();
-
-                counter += nodes.Count;
-                leafs = new leaf[counter];
-
-                counter = 0;
-                fr = new System.IO.StreamReader(namesFile);
+                 fr = new System.IO.StreamReader(namesFile);
 
                 while (fr.Peek() > 0)
                 {
@@ -147,8 +129,7 @@ namespace Taxonomy_WoRMS
                         leaf l = new leaf(items);
                         if (l.getIsGood == true)
                         {
-                            leafs[counter] = l;
-                            counter++;
+                            allLeafs.Add( l);
                         }
                         l = null;
                     }
@@ -158,12 +139,11 @@ namespace Taxonomy_WoRMS
 
                 foreach (node n in nodes.Values)
                 {
-                    leafs[counter] = n.getLeaf();
-                    counter++;
+                    allLeafs.AddRange(n.getLeafs());
                 }
+                leafs=allLeafs.ToArray();
 
-
-                Text = "Sorting list of " + counter.ToString("N0") + " common English and latin names";
+                Text = "Sorting list of " + allLeafs.Count.ToString("N0") + " common English and latin names";
                 Application.DoEvents();
                 Array.Sort(leafs, new leafComparer());
 
@@ -177,8 +157,6 @@ namespace Taxonomy_WoRMS
                 if (fr != null) { fr.Close(); }
                 Text = formText;
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -8,7 +8,7 @@
 
 ## Introduction
 
-<img align="right" src="Guide/images/introFigure.jpg">
+<img align="right" src="Guide/images/introFigure1.jpg">
 
 ```Taxonomic WoRMS``` is designed to annotate a Blast hit results file with each query sequence's description used to search a local copy of the WoRMS taxonomy data. Once annotated the blast hit file can then be combined to a read count matrix file such that the resultant file contains both the sequences read counts in an array of samples and the likely taxonomic origin of the sequence. 
 
