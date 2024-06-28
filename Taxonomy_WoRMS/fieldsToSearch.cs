@@ -63,10 +63,10 @@ namespace Taxonomy_WoRMS
             }
 
             if (secondPresent == true)
-            {
-                items = items[localFF].Split(second);
-
+            {               
                 if (ignoreNones == true) { items = RemoveNones(items); }
+
+                 items = items[localFF].Split(second);
 
                 if (secondFromEnd)
                 {

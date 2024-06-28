@@ -120,13 +120,21 @@ When working with GenBank descriptions, the data line is split into fields using
 
 Figure 7: Using a space character (or \\s) will break a GenBank description in to single words. The selecting the first four fields (words)(blue box) should allow the analysis of a sequence prefixed with a generic phrase. Finally selecting the combine two terms options (red box) creates search terms consisting of two words.
 
-When searching for taxonomic data in the NCBI data set, ```Taxonomy WoRMS``` processes the terms from left to right, for example in Figure 7 it would first search for matches to ***Peridiniales***, then ***Amphidiniopsis*** and finally ***Amphidiniopsis uroensis***. If it finds a match, it returns it and stops searching for possibly better ones. Consequently, it is important to check the search order is appropriate: if the probable best search term is at the end of the text (***Amphidiniopsis uroensis***) rather than the start (***Peridiniales***) in the lower text area select, the reverse search term option (blue box in Figure 8) should be selected  to reverse the order (green box Figure 8) so ***Amphidiniopsis uroensis*** is the first search term and not **Peridiniales***.
+When searching for taxonomic data in the NCBI data set, ```Taxonomy WoRMS``` processes the terms from left to right, for example in Figure 7 it would first search for matches to ***Peridiniales***, then ***Amphidiniopsis*** and finally ***Amphidiniopsis uroensis***. If it finds a match, it returns it and stops searching for possibly better ones. Consequently, it is important to check the search order is appropriate: if the probable best search term is at the end of the text (***Amphidiniopsis uroensis***) rather than the start (***Peridiniales***) in the lower text area select, the reverse search term option (blue box in Figure 8a) should be selected  to reverse the order (green box Figure 8a) so ***Amphidiniopsis uroensis*** is the first search term and not **Peridiniales***.
 
-![Figure 8](images/figure8.jpg)
+![Figure 8a](images/figure8.jpg)
 
-Figure 8
+Figure 8a
 
 <hr />
+
+![Figure 8b](images/figure8b.jpg)
+
+Figure 8b
+
+<hr />
+
+IF the sequences were annotated against the BOLD data set, unset taxonomic terms are identified by the phrase 'None' (Red line in Figure 8b). To instruct Taxonomy_NCBI to ignore these field tick the Ignore "None" items option (blur box in Figure 8b). This will remove the "None" fields from the subsequent taxonomic term searchers (Green line in lower text box in Figure 8b).
 
 Finally, pressing the Accept button will process the entire blast hits file and create a new file with the same name as the blast hit file, but with ***_annotated*** appended to its name, in the same folder. In the new file the field from which the search term is derived is removed and the taxonomic string is appended to the end of the line after a delimiter character.
 
