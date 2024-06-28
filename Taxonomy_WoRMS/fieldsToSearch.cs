@@ -64,6 +64,8 @@ namespace Taxonomy_WoRMS
             {
                 items = items[localFF].Split(second);
 
+                //items=RemoveNones(items);
+
                 if (secondFromEnd)
                 {
                     localSS = items.Length - 1 - secondFirstIndex;
@@ -117,6 +119,23 @@ namespace Taxonomy_WoRMS
             { answer = ReverseOrder(answer); }    
 
             return answer;
+        }
+
+        private string[] RemoveNones(string[] itemsIn)
+        {
+            int place = itemsIn.Length;
+            for (int index = itemsIn.Length - 1; index > -1;index--)
+            {
+                if (itemsIn[index].ToLower().Equals("none") == false)
+                {
+                    place = index + 1;
+                    break;
+                }
+            }
+
+            string[] itemsOut = new string[place];
+            Array.Copy(itemsIn,itemsOut,itemsOut.Length);
+            return itemsOut;
         }
 
         private List<string> ReverseOrder(List<string> answer)
