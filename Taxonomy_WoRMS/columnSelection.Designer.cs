@@ -54,6 +54,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.chkIgnoreNones = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSecondSecondColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSecondFirstColumn)).BeginInit();
@@ -63,9 +64,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.chkIgnoreNones);
             this.groupBox1.Controls.Add(this.chkReverseOrder);
             this.groupBox1.Controls.Add(this.chkCombinefields);
             this.groupBox1.Controls.Add(this.label8);
@@ -101,7 +103,7 @@
             this.chkReverseOrder.Location = new System.Drawing.Point(9, 273);
             this.chkReverseOrder.Name = "chkReverseOrder";
             this.chkReverseOrder.Size = new System.Drawing.Size(473, 17);
-            this.chkReverseOrder.TabIndex = 21;
+            this.chkReverseOrder.TabIndex = 11;
             this.chkReverseOrder.Text = "Reverse the order of the terms: terms at the start of the list are processed firs" +
     "t";
             this.chkReverseOrder.UseVisualStyleBackColor = true;
@@ -109,13 +111,13 @@
             // 
             // chkCombinefields
             // 
-            this.chkCombinefields.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.chkCombinefields.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chkCombinefields.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkCombinefields.Location = new System.Drawing.Point(9, 232);
             this.chkCombinefields.Name = "chkCombinefields";
             this.chkCombinefields.Size = new System.Drawing.Size(473, 35);
-            this.chkCombinefields.TabIndex = 20;
+            this.chkCombinefields.TabIndex = 10;
             this.chkCombinefields.Text = "If a field is split on a space for example, it may split a name in two. Check thi" +
     "s option if you wish to combine two fields per search";
             this.chkCombinefields.UseVisualStyleBackColor = true;
@@ -141,13 +143,13 @@
             // 
             // txtLine
             // 
-            this.txtLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLine.Location = new System.Drawing.Point(9, 359);
             this.txtLine.Multiline = true;
             this.txtLine.Name = "txtLine";
             this.txtLine.Size = new System.Drawing.Size(473, 65);
-            this.txtLine.TabIndex = 17;
+            this.txtLine.TabIndex = 14;
             // 
             // btnNext
             // 
@@ -155,7 +157,7 @@
             this.btnNext.Location = new System.Drawing.Point(407, 330);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 16;
+            this.btnNext.TabIndex = 13;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -166,14 +168,14 @@
             this.btnPervious.Location = new System.Drawing.Point(326, 330);
             this.btnPervious.Name = "btnPervious";
             this.btnPervious.Size = new System.Drawing.Size(75, 23);
-            this.btnPervious.TabIndex = 15;
+            this.btnPervious.TabIndex = 12;
             this.btnPervious.Text = "Previous";
             this.btnPervious.UseVisualStyleBackColor = true;
             this.btnPervious.Click += new System.EventHandler(this.btnPervious_Click);
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.Location = new System.Drawing.Point(6, 301);
             this.label6.Name = "label6";
@@ -184,14 +186,14 @@
             // 
             // txtSelected
             // 
-            this.txtSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.txtSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSelected.Location = new System.Drawing.Point(9, 443);
             this.txtSelected.Multiline = true;
             this.txtSelected.Name = "txtSelected";
             this.txtSelected.Size = new System.Drawing.Size(473, 95);
-            this.txtSelected.TabIndex = 13;
+            this.txtSelected.TabIndex = 15;
             // 
             // chkSecondFromEnd
             // 
@@ -200,7 +202,7 @@
             this.chkSecondFromEnd.Location = new System.Drawing.Point(155, 209);
             this.chkSecondFromEnd.Name = "chkSecondFromEnd";
             this.chkSecondFromEnd.Size = new System.Drawing.Size(165, 17);
-            this.chkSecondFromEnd.TabIndex = 12;
+            this.chkSecondFromEnd.TabIndex = 7;
             this.chkSecondFromEnd.Text = "Count from the end of the line";
             this.chkSecondFromEnd.UseVisualStyleBackColor = true;
             this.chkSecondFromEnd.CheckedChanged += new System.EventHandler(this.chkSecondFromEnd_CheckedChanged);
@@ -212,7 +214,7 @@
             this.chkFirstFromEnd.Location = new System.Drawing.Point(155, 162);
             this.chkFirstFromEnd.Name = "chkFirstFromEnd";
             this.chkFirstFromEnd.Size = new System.Drawing.Size(165, 17);
-            this.chkFirstFromEnd.TabIndex = 11;
+            this.chkFirstFromEnd.TabIndex = 3;
             this.chkFirstFromEnd.Text = "Count from the end of the line";
             this.chkFirstFromEnd.UseVisualStyleBackColor = true;
             this.chkFirstFromEnd.CheckedChanged += new System.EventHandler(this.chkFirstFromEnd_CheckedChanged);
@@ -233,7 +235,7 @@
             0});
             this.nudSecondSecondColumn.Name = "nudSecondSecondColumn";
             this.nudSecondSecondColumn.Size = new System.Drawing.Size(75, 20);
-            this.nudSecondSecondColumn.TabIndex = 10;
+            this.nudSecondSecondColumn.TabIndex = 9;
             this.nudSecondSecondColumn.Value = new decimal(new int[] {
             1,
             0,
@@ -257,7 +259,7 @@
             0});
             this.nudSecondFirstColumn.Name = "nudSecondFirstColumn";
             this.nudSecondFirstColumn.Size = new System.Drawing.Size(75, 20);
-            this.nudSecondFirstColumn.TabIndex = 9;
+            this.nudSecondFirstColumn.TabIndex = 8;
             this.nudSecondFirstColumn.Value = new decimal(new int[] {
             1,
             0,
@@ -268,7 +270,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 184);
+            this.label5.Location = new System.Drawing.Point(6, 182);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(213, 13);
             this.label5.TabIndex = 8;
@@ -290,7 +292,7 @@
             0});
             this.nudFirstSecondColumn.Name = "nudFirstSecondColumn";
             this.nudFirstSecondColumn.Size = new System.Drawing.Size(75, 20);
-            this.nudFirstSecondColumn.TabIndex = 7;
+            this.nudFirstSecondColumn.TabIndex = 5;
             this.nudFirstSecondColumn.Value = new decimal(new int[] {
             1,
             0,
@@ -314,7 +316,7 @@
             0});
             this.nudFirstFirstColumn.Name = "nudFirstFirstColumn";
             this.nudFirstFirstColumn.Size = new System.Drawing.Size(75, 20);
-            this.nudFirstFirstColumn.TabIndex = 6;
+            this.nudFirstFirstColumn.TabIndex = 4;
             this.nudFirstFirstColumn.Value = new decimal(new int[] {
             1,
             0,
@@ -338,7 +340,7 @@
             this.txtSecondSplit.Location = new System.Drawing.Point(407, 117);
             this.txtSecondSplit.Name = "txtSecondSplit";
             this.txtSecondSplit.Size = new System.Drawing.Size(75, 20);
-            this.txtSecondSplit.TabIndex = 4;
+            this.txtSecondSplit.TabIndex = 2;
             this.txtSecondSplit.TextChanged += new System.EventHandler(this.txtSecondSplit_TextChanged);
             // 
             // label3
@@ -348,7 +350,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(338, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Split the selected column using this charater (if empty whole filed used)";
+            this.label3.Text = "Split the selected column using this charater (if empty whole field used)";
             // 
             // txtFirstSplit
             // 
@@ -356,7 +358,7 @@
             this.txtFirstSplit.Location = new System.Drawing.Point(407, 91);
             this.txtFirstSplit.Name = "txtFirstSplit";
             this.txtFirstSplit.Size = new System.Drawing.Size(75, 20);
-            this.txtFirstSplit.TabIndex = 2;
+            this.txtFirstSplit.TabIndex = 1;
             this.txtFirstSplit.TextChanged += new System.EventHandler(this.txtFirstSplit_TextChanged);
             // 
             // label2
@@ -370,7 +372,7 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Location = new System.Drawing.Point(6, 25);
             this.label1.Name = "label1";
@@ -385,7 +387,7 @@
             this.btnAccept.Location = new System.Drawing.Point(338, 562);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 17;
+            this.btnAccept.TabIndex = 16;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
             // 
@@ -399,6 +401,17 @@
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // chkIgnoreNones
+            // 
+            this.chkIgnoreNones.AutoSize = true;
+            this.chkIgnoreNones.Location = new System.Drawing.Point(9, 211);
+            this.chkIgnoreNones.Name = "chkIgnoreNones";
+            this.chkIgnoreNones.Size = new System.Drawing.Size(122, 17);
+            this.chkIgnoreNones.TabIndex = 6;
+            this.chkIgnoreNones.Text = "Ignore \"None\" items";
+            this.chkIgnoreNones.UseVisualStyleBackColor = true;
+            this.chkIgnoreNones.CheckedChanged += new System.EventHandler(this.chkIgnoreNones_CheckedChanged);
             // 
             // columnSelection
             // 
@@ -449,5 +462,6 @@
         private System.Windows.Forms.TextBox txtLine;
         private System.Windows.Forms.CheckBox chkCombinefields;
         private System.Windows.Forms.CheckBox chkReverseOrder;
+        private System.Windows.Forms.CheckBox chkIgnoreNones;
     }
 }

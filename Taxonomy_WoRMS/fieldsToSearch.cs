@@ -20,7 +20,8 @@ namespace Taxonomy_WoRMS
         private int itemsCount = -1;
         private bool combinetwoFields = false;
         private bool reverseOrder = false;
-        public fieldsToSearch(char First, bool SecondPresent, char Second, bool FirstFromEnd, int FirstFirstIndex, int FirstSecondIndex, bool SecondFromEnd, int SecondFirstIndex, int SecondSecondIndex, int ItemsCount, bool CombinetwoFields, bool ReverseOrder)
+        private bool ignoreNones = false;
+        public fieldsToSearch(char First, bool SecondPresent, char Second, bool FirstFromEnd, int FirstFirstIndex, int FirstSecondIndex, bool SecondFromEnd, int SecondFirstIndex, int SecondSecondIndex, int ItemsCount, bool CombinetwoFields, bool ReverseOrder, bool IgnoreNones)
         {
             first = First;
             secondPresent = SecondPresent;
@@ -34,6 +35,7 @@ namespace Taxonomy_WoRMS
             itemsCount = ItemsCount;
             combinetwoFields = CombinetwoFields;
             reverseOrder = ReverseOrder;
+            ignoreNones = IgnoreNones;
         }
 
         public int ItemsCount { get { return itemsCount; } }
@@ -64,7 +66,7 @@ namespace Taxonomy_WoRMS
             {
                 items = items[localFF].Split(second);
 
-                //items=RemoveNones(items);
+                if (ignoreNones == true) { items = RemoveNones(items); }
 
                 if (secondFromEnd)
                 {

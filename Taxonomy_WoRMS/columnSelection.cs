@@ -372,16 +372,21 @@ namespace Taxonomy_WoRMS
         {
             SplitCurrentLine();
         }
+        private void chkIgnoreNones_CheckedChanged(object sender, EventArgs e)
+        {
+            SplitCurrentLine();
+        }
 
         public fieldsToSearch getFieldsToSearch()
         {
             if (firstSet == true)
             {
-                fieldsToSearch fts = new fieldsToSearch(first, secondSet, second, chkFirstFromEnd.Checked, firstFirstIndex, firstSecondIndex, chkSecondFromEnd.Checked, secondFirstIndex, secondSecondIndex, itemsCount, chkCombinefields.Checked, chkReverseOrder.Checked);
+                fieldsToSearch fts = new fieldsToSearch(first, secondSet, second, chkFirstFromEnd.Checked, firstFirstIndex, firstSecondIndex, chkSecondFromEnd.Checked, secondFirstIndex, secondSecondIndex, itemsCount, chkCombinefields.Checked, chkReverseOrder.Checked, chkIgnoreNones.Checked);
                 return fts;
             }
             else
             { return null; }
         }
+
     }
 }
