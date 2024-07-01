@@ -125,19 +125,16 @@ namespace Taxonomy_WoRMS
 
         private string[] RemoveNones(string[] itemsIn)
         {
-            int place = itemsIn.Length;
-            for (int index = itemsIn.Length - 1; index > -1;index--)
+            List<string> answer = new List<string>();
+            for (int index = 0; index < itemsIn.Length; index++)
             {
                 if (itemsIn[index].ToLower().Equals("none") == false)
                 {
-                    place = index + 1;
-                    break;
+                    answer.Add(itemsIn[index]);
                 }
             }
 
-            string[] itemsOut = new string[place];
-            Array.Copy(itemsIn,itemsOut,itemsOut.Length);
-            return itemsOut;
+            return answer.ToArray();
         }
 
         private List<string> ReverseOrder(List<string> answer)
