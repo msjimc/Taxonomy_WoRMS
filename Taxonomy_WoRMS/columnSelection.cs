@@ -129,17 +129,21 @@ namespace Taxonomy_WoRMS
 
         private void SplitCurrentLine()
         {
-            fieldsToSearch list = getFieldsToSearch();
-            List<string> terms = list.words(firstLines[counter]);
+            try
+            {
+                fieldsToSearch list = getFieldsToSearch();
+                List<string> terms = list.words(firstLines[counter]);
 
-            string response = "";
+                string response = "";
 
-            foreach (string term in terms)
-            { response += term + "  OR  "; }
+                foreach (string term in terms)
+                { response += term + "  OR  "; }
 
-            if (response.Length > 6)
-            { txtSelected.Text = response.Substring(0, response.Length - 6); }
-            else { Reason(); }
+                if (response.Length > 6)
+                { txtSelected.Text = response.Substring(0, response.Length - 6); }
+                else { Reason(); }
+            }
+            catch { }
         }
 
         private void Reason()

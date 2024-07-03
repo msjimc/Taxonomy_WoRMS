@@ -49,7 +49,7 @@ namespace Taxonomy_WoRMS
             int localSF = secondFirstIndex;
             int localSS = secondSecondIndex;
 
-            string[] items = line.Split(first);
+           string[] items = line.Split(first);
 
             if (localFF > items.Length - 1)
             {
@@ -63,10 +63,10 @@ namespace Taxonomy_WoRMS
             }
 
             if (secondPresent == true)
-            {               
-                if (ignoreNones == true) { items = RemoveNones(items); }
-
+            {                             
                  items = items[localFF].Split(second);
+
+                if (ignoreNones == true) { items = RemoveNones(items); }
 
                 if (secondFromEnd)
                 {
