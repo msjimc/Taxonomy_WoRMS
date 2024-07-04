@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(columnSelection));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkIgnoreNones = new System.Windows.Forms.CheckBox();
             this.chkReverseOrder = new System.Windows.Forms.CheckBox();
             this.chkCombinefields = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.chkIgnoreNones = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSecondSecondColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSecondFirstColumn)).BeginInit();
@@ -97,6 +97,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Name field select";
             // 
+            // chkIgnoreNones
+            // 
+            this.chkIgnoreNones.AutoSize = true;
+            this.chkIgnoreNones.Location = new System.Drawing.Point(9, 211);
+            this.chkIgnoreNones.Name = "chkIgnoreNones";
+            this.chkIgnoreNones.Size = new System.Drawing.Size(122, 17);
+            this.chkIgnoreNones.TabIndex = 6;
+            this.chkIgnoreNones.Text = "Ignore \"None\" items";
+            this.chkIgnoreNones.UseVisualStyleBackColor = true;
+            this.chkIgnoreNones.CheckedChanged += new System.EventHandler(this.chkIgnoreNones_CheckedChanged);
+            // 
             // chkReverseOrder
             // 
             this.chkReverseOrder.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -111,8 +122,6 @@
             // 
             // chkCombinefields
             // 
-            this.chkCombinefields.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkCombinefields.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkCombinefields.Location = new System.Drawing.Point(9, 232);
             this.chkCombinefields.Name = "chkCombinefields";
@@ -197,7 +206,6 @@
             // 
             // chkSecondFromEnd
             // 
-            this.chkSecondFromEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSecondFromEnd.AutoSize = true;
             this.chkSecondFromEnd.Location = new System.Drawing.Point(155, 209);
             this.chkSecondFromEnd.Name = "chkSecondFromEnd";
@@ -209,7 +217,6 @@
             // 
             // chkFirstFromEnd
             // 
-            this.chkFirstFromEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkFirstFromEnd.AutoSize = true;
             this.chkFirstFromEnd.Location = new System.Drawing.Point(155, 162);
             this.chkFirstFromEnd.Name = "chkFirstFromEnd";
@@ -401,17 +408,6 @@
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // chkIgnoreNones
-            // 
-            this.chkIgnoreNones.AutoSize = true;
-            this.chkIgnoreNones.Location = new System.Drawing.Point(9, 211);
-            this.chkIgnoreNones.Name = "chkIgnoreNones";
-            this.chkIgnoreNones.Size = new System.Drawing.Size(122, 17);
-            this.chkIgnoreNones.TabIndex = 6;
-            this.chkIgnoreNones.Text = "Ignore \"None\" items";
-            this.chkIgnoreNones.UseVisualStyleBackColor = true;
-            this.chkIgnoreNones.CheckedChanged += new System.EventHandler(this.chkIgnoreNones_CheckedChanged);
             // 
             // columnSelection
             // 
