@@ -37,12 +37,19 @@ Figure 2 the user interface.
 
 ### Importing the WoRMS taxonomic data
 
-The taxonomic data from the WoRMS website is present in two files. The taxon.txt contains the taxonomic id of each taxonomic grouping (i.e. each species, family or clade) with its latin name and ancestor terms of kingdom, phylum, class, order, family, genus, subgenus, specificEpithet	infraspecificEpithet. The names.dmp file contains the common names for each species of which only the English terms are used.
+The taxonomic data from the WoRMS website is present in two files. The taxon.txt contains the taxonomic id of each taxonomic grouping (i.e. each species, family or clade) with its latin name and ancestor terms of ***kingdom***, ***phylum***, ***class***, ***order***, ***family***, ***genus***, ***subgenus***, ***specific - Epithet*** (species),	***infraspecific - Epithet*** (subspecies). The vernacularname.txt file contains the common names for each species of which only the English terms are used. 
 
 Due to differences in annotation, ```Taxonomy WoRMS``` will use a number of latin names for the same species for instance the sea snail ***Cymbiola nobilis*** will also be linked to the scientific name ***Cymbiola (Cymbiola) nobilis nobilis***	as well as ***Cymbiola nobilis nobilis***.
 
+#### Importing all taxonomic data or just "Accepted" taxonomic data
+
+Some taxonomic descriptions have been replaced by ones that are more generally accepted, but for completeness's sake the legacy descriptions are present in the taxon.txt.txt file. This may mean that the annotation step uses an obsolete description for a species, to prevent this tick the ```Only retain "Accepted" taxonomic data``` option before selecting the taxon.txt file. This will discord descriptions that are not explicitly flagged as "Accepted" in the WoRMS data set. (Changing this option after the data has been imported will not have any affect.) 
+
+#### Importing taxonomic data
 
 Pressing the ```Nodes``` in the ```Import taxonomic data``` panel, allows you to select the taxon.txt file which it then imports, linking each term to its parent to form a tree where a species is a leaf while the roots are the terms like ***Eukaryota***. While importing the data the status is given in the windows title bar. When the data has been imported the title will return to ```Taxonomy WoRMS``` and the ```Names``` button will be activated. 
+
+### Adding common English names
 
 Pressing the ```Names``` button will allow you to select and import the vernacularname.txt file. This will add the common English names to the nodes previously imported. Again, the status is shown in the title bar and when completed the title will revert to ```Taxonomy WoRMS``` and the program is now ready to be used.
 

@@ -40,12 +40,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.chkFolder = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkAcceptedOnly = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -54,7 +55,7 @@
             // 
             // btnGetNodes
             // 
-            this.btnGetNodes.Location = new System.Drawing.Point(220, 23);
+            this.btnGetNodes.Location = new System.Drawing.Point(436, 23);
             this.btnGetNodes.Name = "btnGetNodes";
             this.btnGetNodes.Size = new System.Drawing.Size(75, 23);
             this.btnGetNodes.TabIndex = 0;
@@ -65,7 +66,7 @@
             // btnGetNames
             // 
             this.btnGetNames.Enabled = false;
-            this.btnGetNames.Location = new System.Drawing.Point(301, 23);
+            this.btnGetNames.Location = new System.Drawing.Point(517, 23);
             this.btnGetNames.Name = "btnGetNames";
             this.btnGetNames.Size = new System.Drawing.Size(75, 23);
             this.btnGetNames.TabIndex = 1;
@@ -176,8 +177,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(636, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Enter speices name or WoRMS taxonomic ID in first text box and then press the rele" +
-    "vant button on the right to search for the speices tree";
+            this.label2.Text = "Enter speices name or WoRMS taxonomic ID in first text box and then press the rel" +
+    "evant button on the right to search for the speices tree";
             // 
             // groupBox2
             // 
@@ -193,6 +194,16 @@
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Automated analysis";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(398, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "To combine and annotate a series of blast result files in the same folder tick th" +
+    "e box";
             // 
             // chkFolder
             // 
@@ -219,6 +230,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.chkAcceptedOnly);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.btnGetNodes);
             this.groupBox3.Controls.Add(this.btnGetNames);
@@ -228,6 +240,17 @@
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Import taxomoic data";
+            // 
+            // chkAcceptedOnly
+            // 
+            this.chkAcceptedOnly.AutoSize = true;
+            this.chkAcceptedOnly.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkAcceptedOnly.Location = new System.Drawing.Point(220, 27);
+            this.chkAcceptedOnly.Name = "chkAcceptedOnly";
+            this.chkAcceptedOnly.Size = new System.Drawing.Size(210, 17);
+            this.chkAcceptedOnly.TabIndex = 10;
+            this.chkAcceptedOnly.Text = "Only retain \"Accepted\" taxonomic data";
+            this.chkAcceptedOnly.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -251,16 +274,6 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "To combine annotations with counts matrix press the Combine button.";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 34);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(398, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "To combine and annotate a series of blast result files in the same folder tick th" +
-    "e box";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,6 +292,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
@@ -305,6 +319,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkFolder;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chkAcceptedOnly;
     }
 }
 

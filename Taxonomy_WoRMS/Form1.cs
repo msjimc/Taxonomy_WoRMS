@@ -77,11 +77,13 @@ namespace Taxonomy_WoRMS
                                 }
                             }
                             taxonomy += items[6] + "\t[" + items[22] + "]";
-                            if (items[15]=="")
-                            { }
-                            node n = new node(ID, taxonomy, items[15] + " " + items[17], items[5], items[6], items[19]);
-                            if (n.getIsGood == true)
-                            { nodes.Add(n.getTax_ID, n); }
+
+                            if (chkAcceptedOnly.Checked == false || items[22].ToLower().Trim().Equals("accepted"))
+                            {
+                                node n = new node(ID, taxonomy, items[15] + " " + items[17], items[5], items[6], items[19]);
+                                if (n.getIsGood == true)
+                                { nodes.Add(n.getTax_ID, n); } 
+                            }
                         }
                         catch { }
                     }
@@ -92,6 +94,9 @@ namespace Taxonomy_WoRMS
                 fr.Close();
 
                 btnGetNames.Enabled = true;
+                btnNameSearch.Enabled = false;
+                btnTaxoIDSearch.Enabled = false;
+                btnAnnotate.Enabled = false;
             }
             catch
             {
