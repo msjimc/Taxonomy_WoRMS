@@ -58,11 +58,12 @@ Figure 3a: Manually searching for taxonomic data based on a species name by pres
 
 ![Figure 3b](images/figure3b.jpg)
 
-Figure 3b: Manually searching for taxonomic data based on a WoRMS taxonomic ID by pressing the ```Taxo ID``` button(9606 = human)
+Figure 3b: Manually searching for taxonomic data based on a WoRMS taxonomic ID by pressing the ```Taxo ID``` button (9606 = human)
 
 <hr />
 
-The taxonomic data is written to the right hand text area, which does not word wrap the text so that the lines in the left hand area correspond to those in the right hand area. The whole line can be read using the horizontal scroll bar below the text area. At the end of each line, the status of the terms is indicated in square brackets.
+The taxonomic data is written to the right hand text area, which does not word wrap the text so that the lines in the left hand area correspond to those in the right hand area. However, when searching using names, if empty lines are pressent you will be give the option to ignore them, if you do ignore them the input values and results will no longer align. The whole line can be read using the horizontal scroll bar below the text area. At the end of each line, the status of the terms is indicated in square brackets.
+These functions may be of particular use if you want to annotated species in an Excel file, in which case, copy the values in the column of interest in the Excel file and paste them into Taxonomic_NCBI and search for the terms. If given the option do not ignore empty lines. When the search is complete, copy the results from Taxonomic_NCBI to the Excel spreadsheet. 
 
 ### Annotating a blast hit files with WoRMS taxonomic data
 
