@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Taxonomy_WoRMS
 {
@@ -172,30 +173,19 @@ namespace Taxonomy_WoRMS
                 string[] items = l.Split('\t');
                 if (string.IsNullOrEmpty(items[0]) == false)
                 {
-                    if (nodes.ContainsKey(Convert.ToInt32(items[0])) == true)
-                    { result = nodes[Convert.ToInt32(items[0])].getString(); }
-                    results[count++] = l + "\t" + result + "\t" + l;
+                    try
+                    {
+                        if (nodes.ContainsKey(Convert.ToInt32(items[0])) == true)
+                        { result = nodes[Convert.ToInt32(items[0])].getString(); }
+                        else { result = "Not found"; }
+                        results[count++] = l + "\t" + result + "\t" + l;
+                    }
+                    catch { results[count++] = l + "\tError\t" + l; }
                 }
+                else { results[count++] = l + "\tBlank\t" + l; }
             }
-
-            count = 0;
-            Array.Sort(results);
-            foreach (string l in results)
-            {
-                if (string.IsNullOrEmpty(l) == false)
-                { count++; }
-            }
-            string[] cleanResuts = new string[count];
-            count = 0;
-            foreach (string l in results)
-            {
-                if (string.IsNullOrEmpty(l) == false)
-                {
-                    cleanResuts[count] = l;
-                    count++;
-                }
-            }
-            txtData.Lines = cleanResuts;
+            
+            txtData.Lines = results;
         }
 
         private void btnName_Click(object sender, EventArgs e)
@@ -217,40 +207,56 @@ namespace Taxonomy_WoRMS
                 }
             }
 
+            if (cleanInput.Length != textBox1.Lines.Length)
+            {
+                if (MessageBox.Show("Do you want to ignore empty lines?", "Ignore spaces", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                { cleanInput = textBox1.Lines; }
+            }
+
+            List<string> results = new List<string>();
+
             txtData.Clear();
             leafBinarySearch lbs = new leafBinarySearch();
             foreach (string i in cleanInput)
             {
                 string name = i.Trim().ToLower();
-                int index = Array.BinarySearch(leafs, name, lbs);
-                if (index > -1)
-                {
-                    string answer = i + "\t";
-                    if (nodes.ContainsKey(leafs[index].getTax_ID) == true)
-                    {
-                        answer += "\t" + nodes[leafs[index].getTax_ID].getString() + "\r\n";
-                    }
-                    else { answer += "No infomation\r\n"; }
-                    txtData.Text += answer;
-                }
+                if (string.IsNullOrEmpty(name) == true)
+                { results.Add("Blank"); }
                 else
                 {
-                    string firstName = name.Split(' ')[0];
-                    int index1 = Array.BinarySearch(leafs, firstName, lbs);
-                    if (index1 > -1)
+                    int index = Array.BinarySearch(leafs, name, lbs);
+                    if (index > -1)
                     {
                         string answer = i + "\t";
-                        if (nodes.ContainsKey(leafs[index1].getTax_ID) == true)
+                        if (nodes.ContainsKey(leafs[index].getTax_ID) == true)
                         {
-                            answer += firstName + "\t" + nodes[leafs[index1].getTax_ID].getString() + "\r\n";
+                            answer += "\t" + nodes[leafs[index].getTax_ID].getString();
                         }
-                        else { answer += "No infomation\r\n"; }
-                        txtData.Text += answer;
+                        else { answer += "No infomation"; }
+                        results.Add(answer);
                     }
                     else
-                    { txtData.Text += i + "\t\tNot found\r\n"; }
+                    {
+                        string firstName = name.Split(' ')[0];
+                        int index1 = Array.BinarySearch(leafs, firstName, lbs);
+                        if (index1 > -1)
+                        {
+                            string answer = i + "\t";
+                            if (nodes.ContainsKey(leafs[index1].getTax_ID) == true)
+                            {
+                                answer += firstName + "\t" + nodes[leafs[index1].getTax_ID].getString();
+                            }
+                            else { answer += "No infomation"; }
+                            results.Add(answer);
+                        }
+                        else
+                        {
+                            results.Add(i + "\t\tNot found"); 
+                        }
+                    }
                 }
             }
+            txtData.Lines = results.ToArray();
 
         }
 
