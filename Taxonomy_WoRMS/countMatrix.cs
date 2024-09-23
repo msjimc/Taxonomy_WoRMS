@@ -283,7 +283,7 @@ namespace Taxonomy_WoRMS
                     if (rdoIndexMatch.Checked == true)
                     { speciesIndex = int.Parse(items[cboFields.SelectedIndex - 1].Trim()); }
                     else
-                    { speciesIndex = speciesName.IndexOf(items[cboFields.SelectedIndex - 1].Trim().ToLower()); }
+                    { speciesIndex = 1 + speciesNamesLowerCase.IndexOf(items[cboFields.SelectedIndex - 1].Trim().ToLower()); }
 
 
                     fw.Write(items[cboFields.SelectedIndex - 1].Trim() + "_" + speciesName[speciesIndex - 1] + delimiter);
