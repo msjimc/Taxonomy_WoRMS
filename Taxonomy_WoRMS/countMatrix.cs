@@ -275,7 +275,7 @@ namespace Taxonomy_WoRMS
                 foreach (string name in sampleNames)
                 { fw.Write("\t" + name); }
                 fw.Write("\n");
-
+ 
                 while (sfBlast.Peek() > 0)
                 {
                     line = sfBlast.ReadLine();
