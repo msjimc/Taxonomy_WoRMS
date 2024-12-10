@@ -60,6 +60,8 @@ namespace Taxonomy_WoRMS
         private void txtFirstSplit_TextChanged(object sender, EventArgs e)
         {
             string value = txtFirstSplit.Text;
+            if (value==" ")
+            { value = "\\s"; }
             if (value.Length > 0)
             {
                 if (txtFirstSplit.Text == "\\t")
@@ -78,6 +80,8 @@ namespace Taxonomy_WoRMS
         private void txtSecondSplit_TextChanged(object sender, EventArgs e)
         {
             string value = txtSecondSplit.Text;
+            if (value == " ")
+            { value = "\\s"; }
             if (value.Length > 0)
             {
 

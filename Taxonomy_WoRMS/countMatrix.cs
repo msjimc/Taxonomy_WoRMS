@@ -164,6 +164,8 @@ namespace Taxonomy_WoRMS
             { splitSet = false; }
             else
             {
+                if (txtSplit.Text == " ")
+                { txtSplit.Text = "\\s"; }
                 if (txtSplit.Text == "\\t")
                 { split = '\t'; }
                 else if (txtSplit.Text == "\\s")
